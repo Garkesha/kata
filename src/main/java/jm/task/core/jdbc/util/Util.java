@@ -14,9 +14,14 @@ public class Util {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "1z2x3c4v";
 
+    private static Connection connection;
+
     public static Connection open() {
         try {
-            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            if (connection == null) {
+                connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            }
+            return connection;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
